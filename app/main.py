@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, Form
+
 from app.schemas import MatchRequest, MatchResponse
 from app.skill_extraction import extract_skills
 from app.similarity import tfidf_similarity, semantic_similarity
@@ -7,6 +8,7 @@ from app.scoring import (
     calculate_final_score,
     generate_suggestions
 )
+from app.utils import extract_text_from_pdf_bytes, parse_skills
 
 
 app = FastAPI(
