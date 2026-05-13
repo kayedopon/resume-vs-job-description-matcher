@@ -10,7 +10,8 @@ class MatchRequest(BaseModel):
 
 class MatchResponse(BaseModel):
     skill_score: float
-    skill_score: float
+    tfidf_score: float
+    semantic_score: float
     final_score: float
     resume_skills: List[str]
     job_skills: List[str]

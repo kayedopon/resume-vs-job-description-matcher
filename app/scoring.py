@@ -1,5 +1,5 @@
 from app.skill_extraction import extract_skills
-from app.similarity import skill_match_score, tfidf_similarity, semantic_similarity
+from app.similarity import tfidf_similarity, semantic_similarity
 
 import json
 
@@ -23,33 +23,6 @@ def generate_suggestions(missing_skills: list[str]) -> str:
   missing = ", ".join(missing_skills)
 
   return f"Consider adding relevant experience, projects or courses related to: {missing}."
-
-def match_resume_to_job(resume, job, skills):
-    resume_skills = set(extract_skills(resume, skills))
-    job_skills = set(extract_skills(job, skills))
-
-    matched_skills = resume_skills.intersection(job_skills)
-    missing_skills = job_skills.difference(resume_skills)
-
-    skill_score = skill_match_score(resume_skills, job_skills)
-    tfidf_score = tfidf_similarity(resume, job)
-    semantic_score = semantic_similarity(resume, job)
-    final_score = calculate_final_score(skill_score, tfidf_score, semantic_score)
-
-    results = {
-      "skill_score": skill_score,
-      "tfidf_score": tfidf_score,
-      "semantic_score": semantic_score,
-      "final_score": final_score,
-      "resume_skills": resume_skills,
-      "job_skills": job_skills,
-      "matched_skills": matched_skills,
-      "missing_skills": missing_skills,
-      "suggestion": generate_suggestions(missing_skills)
-    }
-
-    return json.dumps(results)
-
 
 
 
