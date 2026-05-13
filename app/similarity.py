@@ -4,15 +4,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from sentence_transformers import SentenceTransformer
 
-from src.preprocessing import clean_text
+from app.preprocessing import clean_text
 
-
-def skill_match_score(resume_skills, job_skills):
-    if len(job_skills) == 0:
-        return 0
-    
-    score = len(resume_skills.intersection(job_skills)) / len(job_skills)
-    return round(score * 100, 2)
 
 def tfidf_similarity(resume_text, job_text):
   texts = [clean_text(resume_text), clean_text(job_text)]

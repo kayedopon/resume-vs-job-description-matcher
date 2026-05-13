@@ -1,4 +1,4 @@
-from src.preprocessing import clean_text
+from app.preprocessing import clean_text
 
 import re
 
