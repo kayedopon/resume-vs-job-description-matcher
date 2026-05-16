@@ -4,7 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from sentence_transformers import SentenceTransformer
 
-from app.preprocessing import clean_text
+from backend.app.preprocessing import clean_text
 
 
 def tfidf_similarity(resume_text, job_text):

@@ -1,5 +1,5 @@
-from app.skill_extraction import extract_skills
-from app.similarity import tfidf_similarity, semantic_similarity
+from backend.app.skill_extraction import extract_skills
+from backend.app.similarity import tfidf_similarity, semantic_similarity
 
 import json
 
