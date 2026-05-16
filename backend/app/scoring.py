@@ -1,7 +1,5 @@
-from backend.app.skill_extraction import extract_skills
-from backend.app.similarity import tfidf_similarity, semantic_similarity
-
-import json
+from app.skill_extraction import extract_skills
+from app.similarity import tfidf_similarity, semantic_similarity
 
 
 def skill_match_score(resume_skills: set[str], job_skills: set[str]) -> float:
