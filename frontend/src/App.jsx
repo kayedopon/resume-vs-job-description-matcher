@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import "./App.css";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 const defaultSkills = [
   "Python",
@@ -166,7 +166,6 @@ export default function App() {
   return (
     <div className="page">
       <header className="header">
-        <p className="badge">FastAPI + NLP Project</p>
         <h1>Resume vs Job Description Matcher</h1>
         <p className="subtitle">
           Compare a resume with a job description, calculate match scores,
@@ -206,11 +205,28 @@ export default function App() {
           ) : (
             <div className="field">
               <label>Resume PDF</label>
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => setFile(e.target.files?.[0] || null)}
-              />
+
+              <label className="file-upload-box">
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  onChange={(e) => setFile(e.target.files?.[0] || null)}
+                />
+
+                <div className="file-upload-content">
+                  <div className="file-icon">📄</div>
+
+                  <div>
+                    <p className="file-title">
+                      {file ? file.name : "Choose a PDF resume"}
+                    </p>
+                    <p className="file-subtitle">
+                      Click here to upload your resume file
+                    </p>
+                  </div>
+                </div>
+              </label>
+
               {file && <p className="muted">Selected file: {file.name}</p>}
             </div>
           )}
