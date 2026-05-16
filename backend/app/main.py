@@ -1,20 +1,34 @@
 from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.middleware.cors import CORSMiddleware
 
-from app.schemas import MatchRequest, MatchResponse
-from app.skill_extraction import extract_skills
-from app.similarity import tfidf_similarity, semantic_similarity
-from app.scoring import (
+from backend.app.schemas import MatchRequest, MatchResponse
+from backend.app.skill_extraction import extract_skills
+from backend.app.similarity import tfidf_similarity, semantic_similarity
+from backend.app.scoring import (
     skill_match_score,
     calculate_final_score,
     generate_suggestions
 )
-from app.utils import extract_text_from_pdf_bytes, parse_skills
+from backend.app.utils import extract_text_from_pdf_bytes, parse_skills
 
 
 app = FastAPI(
     title="Resume vs Job Description Matcher API",
     description="NLP API for comparing resumes with job descriptions.",
     version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.get("/")
